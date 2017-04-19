@@ -1,0 +1,3 @@
+[submodule "QueenBee"]
+	path = QueenBee
+	url = https://github.com/adituv/Queen-Bee.git
