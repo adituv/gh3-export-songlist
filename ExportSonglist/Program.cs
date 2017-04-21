@@ -43,13 +43,14 @@ namespace ExportSonglist
                 return;
             }
 
-            var gameDataDir = string.Format(@"{0}DATA\PAK\", gh3path);
+            var gameDataDir = Path.Combine(gh3path, "DATA", "PAK");
             exportSongList(gameDataDir, fileNames[gh3lang]);
         }
 
         static void exportSongList(string gameDataDir, string gameFileName)
         {
-            var pf = new PakFormat(gameDataDir + gameFileName + ".pak.xen", gameDataDir + gameFileName + ".pab.xen", gameDataDir + "dbg.pak.xen", PakFormatType.PC);
+            var qb = Path.Combine(gameDataDir, gameFileName);
+            var pf = new PakFormat(qb + ".pak.xen", qb + ".pab.xen", Path.Combine(gameDataDir, "dbg.pak.xen"), PakFormatType.PC);
             var editor = new PakEditor(pf);
             var qbFile = editor.ReadQbFile(@"scripts\guitar\songlist.qb");
             var songlist = (QbItemStruct) qbFile.FindItem(QbKey.Create("permanent_songlist_props"), false);
